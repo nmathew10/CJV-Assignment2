@@ -49,8 +49,21 @@ public class UserService implements UserDetailsService
         {
             throw new Exception (" User with id " + id + " is not found ");
         }
+
         return user;
     }
+
+    public String getUserIdByUsername(String username)
+    {
+        //return userRepository.findById(id);
+
+        UserModel user = userRepository.findByUsername(username);
+
+
+        return user.getId();
+    }
+
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -2,6 +2,7 @@ package com.example.digitalvideostore.Controllers;
 
 import com.example.digitalvideostore.CustomizedResponse;
 import com.example.digitalvideostore.Models.UserModel;
+import com.example.digitalvideostore.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,11 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
+
 @RestController
 public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private UserService userService;
 
     @PostMapping(value = "/auth", consumes = {
             MediaType.APPLICATION_JSON_VALUE
@@ -30,7 +35,8 @@ public class AuthController {
 
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
-            var response = new CustomizedResponse( "You login Successfully", null);
+            var response = new CustomizedResponse( "You login Successfully",
+                    Collections.singletonList(userService.getUserIdByUsername(user.getUsername())));
 
             return new ResponseEntity( response, HttpStatus.OK);
 
