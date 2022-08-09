@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 
-@CrossOrigin(origins = {"http://localhost:3000", "https://digital-video-store-n.herokuapp.com"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://digital-video-store-n.herokuapp.com", "https://cjv.vercel.app/"})
 @RestController
 public class MediaItemController
 {
